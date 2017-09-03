@@ -34,7 +34,7 @@ var getParsedData = function(data){
       name: data.name || '',
       budget : data.budget,
       genres : data.genres,
-      description:data.overview,
+      description:data.description,
       popularity : data.popularity,
       production_companies : data.production_companies,
       vote_average:data.vote_average,
