@@ -12,10 +12,11 @@ var getMapping = function(indexName){
           "genre":{
             "_all":{"enabled":"false"},
             "properties":{
-              "genres":{"type":"string"},
-              "name":{"type":"string"},
-              "description":{"type":"string"}
-            }
+          	"genres":{"type":"string","analyzer": "keyword"},
+              "name":{"type":"string","analyzer":"english"},
+              "description":{"type":"string","analyzer":"pattern"},
+              "language":{"type":"string","analyzer":"english"}
+	     }
           }
         }
       }
