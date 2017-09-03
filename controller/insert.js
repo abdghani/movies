@@ -146,19 +146,46 @@ var getFromDatabase = function(skip,limit,cb){
 
 var putDataFromDatabase = function(done){
 
-    getFromDatabase(0,100000,function(err,data1){
+    getFromDatabase(0,60000,function(err,data1){
         indexData(data1,false)
         .then(function (res) {
-          console.log("done for 100000");
-          getFromDatabase(100000,100000,function(err,data2){
+          console.log("done for 60000");
+          getFromDatabase(60000,60000,function(err,data2){
               indexData(data2,false)
               .then(function (res) {
-                console.log("done for 200000");
-                getFromDatabase(200000,115485,function(err,data3){
+                console.log("done for 60000");
+                getFromDatabase(120000,60000,function(err,data3){
                     indexData(data3,false)
                     .then(function (res) {
-                      console.log("done for 300000");
-                      done(res);
+                      console.log("done for 120000");
+                        getFromDatabase(180000,60000,function(err,data3){
+                            indexData(data3,false)
+                            .then(function (res) {
+                              console.log("done for 180000");
+                                getFromDatabase(240000,60000,function(err,data3){
+                                    indexData(data3,false)
+                                    .then(function (res) {
+                                      console.log("done for 240000");
+                                        getFromDatabase(300000,60000,function(err,data3){
+                                            indexData(data3,false)
+                                            .then(function (res) {
+                                              console.log("done for 300000");
+                                              
+                                            })
+                                            .catch(function(err){
+                                              console.log(err);
+                                            })
+                                        })
+                                    })
+                                    .catch(function(err){
+                                      console.log(err);
+                                    })
+                                })
+                            })
+                            .catch(function(err){
+                              console.log(err);
+                            })
+                        })
                     })
                     .catch(function(err){
                       console.log(err);
