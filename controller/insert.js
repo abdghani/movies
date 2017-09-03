@@ -31,12 +31,12 @@ var getParsedData = function(data){
 
 
     var res =  {
-      name: data.original_title || '',
+      name: data.name || '',
       budget : data.budget,
-      genres : _.map(data.genres,'name'),
+      genres : data.genres,
       description:data.overview,
       popularity : data.popularity,
-      production_companies : _.map(data.production_companies,'name'),
+      production_companies : data.production_companies,
       vote_average:data.vote_average,
     	vote_count : data.vote_count,
       release_date: rdate,
@@ -44,7 +44,7 @@ var getParsedData = function(data){
     	runtime : data.runtime,
       imdb_id:data.imdb_id,
       adult:data.adult,
-      language:lang,
+      language:data.language,
       _id:data._id
     }
     return res;
@@ -68,6 +68,7 @@ var insertData = function(data){
         delete parsed._id;
         moviesArray.push(parsed);
       })
+console.log(moviesArray[1]);
       esclient
       .getEsClient()
       .bulk({ body: moviesArray })
@@ -128,7 +129,7 @@ var limit = 100000;
 var getFromDatabase = function(skip,limit,cb){
   MongoClient.connect(config.mongourl, function(err, db) {
     console.log("Connected correctly to server");
-    var movies = db.collection('moviesnew');
+    var movies = db.collection('movies');
     movies
     .find()
     .skip(skip)
@@ -146,7 +147,7 @@ var getFromDatabase = function(skip,limit,cb){
 var putDataFromDatabase = function(done){
 
     getFromDatabase(0,100000,function(err,data1){
-        indexData(data1,true)
+        indexData(data1,false)
         .then(function (res) {
           console.log("done for 100000");
           getFromDatabase(100000,100000,function(err,data2){
